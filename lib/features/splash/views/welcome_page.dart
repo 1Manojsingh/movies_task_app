@@ -44,7 +44,7 @@ class _WelcomePageState extends State<WelcomePage> {
         curve: Curves.easeInOut,
       );
     } else {
-      context.router.push(const SimpleHomeRoute());
+      context.router.push(const BaseRoute());
     }
   }
 
