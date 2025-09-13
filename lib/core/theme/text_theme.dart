@@ -66,7 +66,7 @@ final appTextTheme = const TextTheme().copyWith(
     letterSpacing: -0.30,
     height: 1.2,
   ),
-  labelLarge: const TextStyle(
+  titleSmall: const TextStyle(
     color: AppColors.primary,
     fontSize: 12,
     fontFamily: 'Inter',
