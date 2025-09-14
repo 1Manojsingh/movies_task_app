@@ -21,7 +21,7 @@ class AppBottomNavBar extends StatefulWidget {
 class _AppBottomNavBarState extends State<AppBottomNavBar> {
   final List<IconData> items = [
     Icons.home_outlined,
-    Icons.play_circle_outline,
+    Icons.search,
     Icons.person_outline,
   ];
 

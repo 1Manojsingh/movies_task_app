@@ -1,17 +1,9 @@
 class Config {
-  static String googleMapApiKey = "AIzaSyCvrnHd1ou0gYz1iHjCSbPXRbTzVMbXrv4";
-  static String googlePlacesApiKey = "AIzaSyA5of2gk_yX9XHiMo8Pt4H1mWZM4KeWM7o";
-  static String databaseUrl = "https://jpjifftizbzffttvvdlo.supabase.co";
-  static String anonKey ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpwamlmZnRpemJ6ZmZ0dHZ2ZGxvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU3OTQyMzgsImV4cCI6MjA1MTM3MDIzOH0.x8ld1fjxdeU9yDRMILlcnGAlPGgdAhAfTGJfNvlVPNw";
-  static const String apiBaseUrl = "https://jpjifftizbzffttvvdlo.supabase.co/functions/v1";
-  static const String razorPayKeyId = "rzp_test_xvi4xmdDwwBzFn";
-  static const String razorPayKeySecret = "NXPms7JjcjS7LXYpIR9Gqlyk";
-  
-  // AppsFlyer Configuration
-  static const String appsFlyerDevKey = "YERQZepbtDkTqzQBERGgJS";
-  static const String appsFlyerAppId = "com.bookmytask.com"; // Correct Android package name from build.gradle
-  
-  // OneLink Configuration (Update these after setting up OneLink in dashboard)
-  static const String oneLinkeBaseUrl = "https://bookmytask-referral.onelink.me"; // Use your actual subdomain from dashboard
-  static const String oneLinkTemplateId = "FV1D";
+  static const String apiBaseUrl = "https://api.themoviedb.org/3";
+  static const String imageBaseUrl = "https://image.tmdb.org/t/p";
+  static String apiKey = "b44de13a2d44554dba7627d18ad9c4f2";
+  static String accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNDRkZTEzYTJkNDQ1NTRkYmE3NjI3ZDE4YWQ5YzRmMiIsIm5iZiI6MTc1Nzc3OTcxNS42OTgsInN1YiI6IjY4YzU5NzAzMzRkNTcwYjEyYWRmOWU3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iRj_8JburlEO7nhwp4cMiT3ylC0vLosvKtj0G6K5X8g";
+  static const String posterSize = "w500";
+  static const String backdropSize = "w1280";
+  static const String profileSize = "w185";
 }

@@ -28,19 +28,30 @@ class DioHttpService implements HttpService {
   @override
   Map<String, String> headers = {
     'accept': 'application/json',
-    'content-type': 'application/json'
+    'content-type': 'application/json',
+    'Authorization': 'Bearer ${Config.accessToken}',
   };
 
   BaseOptions get baseOptions =>
-      BaseOptions(baseUrl: baseUrl, headers: headers);
+      BaseOptions(
+        baseUrl: baseUrl, 
+        headers: headers,
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 30),
+        sendTimeout: const Duration(seconds: 30),
+      );
 
   Failure handleError(dynamic data) {
     if (data is Map) {
+      if (data['status_message'] is String) {
+        return Failure(data['status_message'], data['status_code'] ?? 1);
+      }
+      
       if (data['error'] is String) {
-        return Failure(data[ 'error'], 1);
+        return Failure(data['error'], 1);
       }
       if (data['detail'] is String) {
-        return Failure( data['detail'], 1);
+        return Failure(data['detail'], 1);
       }
 
       if (data['detail'] is List) {
@@ -54,7 +65,30 @@ class DioHttpService implements HttpService {
         return Failure(data['message'], 1);
       }
     }
-    return const Failure( "Something went wrong",1);
+    
+    // If data is a DioError, provide more specific error messages
+    if (data is DioError) {
+      switch (data.type) {
+        case DioErrorType.connectionTimeout:
+          return const Failure("Connection timeout. Please check your internet connection.", 1);
+        case DioErrorType.sendTimeout:
+          return const Failure("Request timeout. Please try again.", 1);
+        case DioErrorType.receiveTimeout:
+          return const Failure("Response timeout. Please try again.", 1);
+        case DioErrorType.badResponse:
+          return Failure("Server error: ${data.response?.statusCode}", data.response?.statusCode ?? 1);
+        case DioErrorType.cancel:
+          return const Failure("Request cancelled.", 1);
+        case DioErrorType.connectionError:
+          return const Failure("Connection error. Please check your internet connection.", 1);
+        case DioErrorType.badCertificate:
+          return const Failure("Certificate error. Please try again.", 1);
+        case DioErrorType.unknown:
+          return Failure("Unknown error: ${data.message}", 1);
+      }
+    }
+    
+    return const Failure("Something went wrong. Please try again.", 1);
   }
 
   void initialize() {
@@ -88,7 +122,7 @@ class DioHttpService implements HttpService {
           data: response.data,
           responseHeaders: response.headers));
     } on DioError catch (error) {
-      return Left(handleError(error.response?.data));
+      return Left(handleError(error));
     } catch (error) {
       return Left(handleError(error));
     }
